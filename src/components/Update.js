@@ -4,20 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Update() {
 
-    const[userName, setUserName] = useState();
-    const[toggle, setToggle] = useState(false);
-
-    const dispatch = useDispatch();
     const login = useSelector((state) => state.login.token);
-    const user = useSelector((state) => state.user.user);
     const token = login.token;
+    const dispatch = useDispatch();
+
+    const[userName, setUserName] = useState();  
 
     const validUpdate = (e) => {
 
-        if (!userName) {
+        e.preventDefault(); 
 
+        if (!userName) {
             alert("Le champ Username ne peut pas être vide.");
-            e.preventDefault();
             return;
         }
 
@@ -33,34 +31,28 @@ function Update() {
         .then((response) => response.json())
         .then((data) => {
 
-            dispatch(getUser(data.userName));
+            const userInfos = {
+
+                firstName: data.body.firstName,
+                userName: data.body.userName
+            }
+
+            dispatch(getUser(userInfos));
         })
         .catch((error) => {
-
-            console.error(error);
+            console.error("Erreur lors de la mise à jour :", error);
         });
-    }
-
-    const toggleChange = () => {
-
-        setToggle(!toggle);
     }
 
     return (
         <>
-            <div className="header">
-                <h1>Welcome back<br />{user && user.firstName} {user && user.userName} !</h1>
-                <button className="edit-button" onClick={toggleChange}>Edit Name</button>
-                {toggle && 
-                <>
-                    <form onSubmit={validUpdate} className="input-wrapper" style={{ width: "20%", margin: "auto", marginTop: "25px" }}>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" id="username" placeholder='New username' name="username" onChange={e => setUserName(e.target.value)} />
-                        <button className="edit-button" style={{ margin: "auto", marginTop: "20px" }}>Update</button>
-                    </form>
-                </>
-                }
-            </div> 
+            <>
+                <form onSubmit={validUpdate} className="input-wrapper" style={{ width: "20%", margin: "auto", marginTop: "25px" }}>
+                    <label htmlFor="username">Username</label>
+                    <input type="text" id="username" placeholder='New username' name="username" onChange={e => setUserName(e.target.value)} />
+                    <button className="edit-button" style={{ margin: "auto", marginTop: "20px" }}>Update</button>
+                </form>
+            </>
         </>
     )
 }

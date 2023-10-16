@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../redux/actions/loginActions';
-
+import { getUser } from '../redux/actions/userActions';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -34,7 +34,30 @@ function Login() {
             
       const token = { token: access.body.token};
       dispatch(loginUser(token));
-      navigate("/user")
+
+      fetch("http://localhost:3001/api/v1/user/profile", {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token.token
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+
+            console.log(data)
+
+            const userInfos = {
+              id: data.body.id,
+              firstName: data.body.firstName,
+              userName: data.body.userName
+            }
+      
+            dispatch(getUser(userInfos));
+            navigate(`/user/${userInfos.id}`);
+          })
+          .catch((error) => alert("Failed to fetch user data"));
     })
     .catch((error) => alert("Email or Password is invalid"))
   }

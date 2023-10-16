@@ -1,6 +1,9 @@
 const initialState = {
 
-    user: null,
+    user: {
+        userName: '',
+        firstName: '',
+    },
 };
   
 const userReducer = (state = initialState, action) => {
@@ -9,7 +12,11 @@ const userReducer = (state = initialState, action) => {
         case 'GET_USER':
         return {
             ...state,
-            user: action.payload,
+            user: {
+                ...state.user,
+                userName: action.payload.userName,
+                firstName: action.payload.firstName,
+            },
         };
         case 'DELETE_USER':
         return {

@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import { logoutUser } from '../redux/actions/loginActions';
 import { deleteUser } from '../redux/actions/userActions';
 import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Logo from "../img/argentBankLogo.png";
 
 function Navbar() {
@@ -30,22 +32,25 @@ function Navbar() {
                     <h1 className="sr-only">Argent Bank</h1>
                 </NavLink>
                 <div>
-                    <NavLink className="main-nav-item" to="/login">
-                        <i className="fa fa-user-circle"></i>
-                        {user?.user?.firstName}
+                    <NavLink className="main-nav-item" to="/user">
+                        {user && user.user ? (
+                            <>
+                                <FontAwesomeIcon icon={faCircleUser} size='sm' style={{ marginRight: "5px" }} />
+                                {user.user.firstName}
+                            </>
+                        ) : null}
                     </NavLink>
 
                     {login ? (
                         <>
                             <NavLink onClick={checkLogout} className="main-nav-item" to="/login">
-                            <i className="fa fa-user-circle"></i>
+                                <FontAwesomeIcon icon={faRightFromBracket} size="sm" style={{ marginRight: "5px" }} />
                                 Sign Out
                             </NavLink>
                         </>
                         ) : (
                         <>
                             <NavLink className="main-nav-item" to="/login">
-                                <i className="fa fa-user-circle"></i>
                                 Sign In
                             </NavLink>
                         </>

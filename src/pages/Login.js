@@ -34,7 +34,7 @@ function Login() {
             
       const token = { token: access.body.token};
       dispatch(loginUser(token));
-      navigate("/user/:id")
+      navigate("/user")
     })
     .catch((error) => alert("Email or Password is invalid"))
   }

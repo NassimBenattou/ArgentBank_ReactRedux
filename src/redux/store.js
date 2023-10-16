@@ -13,13 +13,18 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root', // La clé principale pour le stockage persistant
   storage, // Utilisez le stockage par défaut (localStorage)
+  blacklist: ['persist'], 
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
 export const store = configureStore({
-  reducer: persistedReducer, // Assurez-vous que le nom de la clé est 'reducer'
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }), 
 });
 
 export const persistor = persistStore(store);

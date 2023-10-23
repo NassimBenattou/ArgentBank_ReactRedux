@@ -6,24 +6,25 @@
   "keywords": [],
   "author": "",
   "license": "",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
-    "axios": "^1.5.1",
+    "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.21",
     "swagger-ui-express": "^4.1.4",
     "yamljs": "^0.3.0"
   },
   "scripts": {
-    "dev:server": "nodemon ./server/server.js",
-    "populate-db": "node ./server/scripts/populateDatabase.js",
+    "dev:server": "nodemon ./server.js",
+    "populate-db": "node ./scripts/populateDatabase.js",
     "server": "node ./server/server.js"
   },
   "devDependencies": {
+    "@types/node": "^20.8.7",
     "nodemon": "^2.0.4"
   }
 }

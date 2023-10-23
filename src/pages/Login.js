@@ -46,8 +46,6 @@ function Login() {
           .then((response) => response.json())
           .then((data) => {
 
-            console.log(data)
-
             const userInfos = {
               id: data.body.id,
               firstName: data.body.firstName,

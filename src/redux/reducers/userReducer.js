@@ -3,6 +3,7 @@ const initialState = {
     user: {
         userName: '',
         firstName: '',
+        id: ''
     },
 };
   
@@ -16,6 +17,7 @@ const userReducer = (state = initialState, action) => {
                 ...state.user,
                 userName: action.payload.userName,
                 firstName: action.payload.firstName,
+                id: action.payload.id
             },
         };
         case 'DELETE_USER':

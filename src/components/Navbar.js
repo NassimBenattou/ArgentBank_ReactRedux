@@ -5,13 +5,13 @@ import { deleteUser } from '../redux/actions/userActions';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import Logo from "../img/argentBankLogo.png";
+import Logo from "../img/argentBankLogo.webp";
 
 function Navbar() {
 
     const dispatch = useDispatch();
     
-    const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.user.user);
     const login = useSelector((state) => state.login.token);
 
     const checkLogout = () => {
@@ -32,11 +32,11 @@ function Navbar() {
                     <h1 className="sr-only">Argent Bank</h1>
                 </NavLink>
                 <div>
-                    <NavLink className="main-nav-item" to="/user">
-                        {user && user.user ? (
+                    <NavLink className="main-nav-item" to={`/user/${user?.id}`}>
+                        {user ? (
                             <>
                                 <FontAwesomeIcon icon={faCircleUser} size='sm' style={{ marginRight: "5px" }} />
-                                {user.user.firstName}
+                                {user?.firstName} {user?.userName}
                             </>
                         ) : null}
                     </NavLink>

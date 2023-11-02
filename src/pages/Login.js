@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { loginUser } from '../redux/actions/loginActions';
 import { getUser } from '../redux/actions/userActions';
 import Navbar from '../components/Navbar';
@@ -12,9 +14,22 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const login = useSelector((state) => state.login.token);
+  const user = useSelector((state) => state.user.user);
+
+  const token = login?.token;
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+
+    if(token){
+
+      navigate(`/user/${user?.id}`);
+    }
+  })
 
   const checkLogin = (e) => {
 
@@ -49,7 +64,7 @@ function Login() {
             const userInfos = {
               id: data.body.id,
               firstName: data.body.firstName,
-              userName: data.body.userName
+              userName: data.body.userName,
             }
       
             dispatch(getUser(userInfos));
@@ -65,7 +80,7 @@ function Login() {
       <Navbar />
         <main className="main bg-dark">
           <section className="sign-in-content">
-            <i className="fa fa-user-circle sign-in-icon"></i>
+            <FontAwesomeIcon icon={faCircleUser} size='lg' />
             <h1>Sign In</h1>
             <form onSubmit={checkLogin}>
               <div className="input-wrapper">

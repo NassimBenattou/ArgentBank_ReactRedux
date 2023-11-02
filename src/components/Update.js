@@ -34,7 +34,8 @@ function Update() {
             const userInfos = {
 
                 firstName: data.body.firstName,
-                userName: data.body.userName
+                userName: data.body.userName,
+                id: data.body.id
             }
 
             dispatch(getUser(userInfos));

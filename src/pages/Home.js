@@ -2,9 +2,9 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Feature from '../components/Feature';
 import Footer from '../components/Footer';
-import iconChat from '../img/icon-chat.png';
-import iconMoney from '../img/icon-money.png';
-import iconSecurity from '../img/icon-security.png';
+import iconChat from '../img/icon-chat.webp';
+import iconMoney from '../img/icon-money.webp';
+import iconSecurity from '../img/icon-security.webp';
 import "../css/main.css";
 
 function Home() {

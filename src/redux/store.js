@@ -7,12 +7,12 @@ import userReducer from './reducers/userReducer';
 const rootReducer = combineReducers({
   login: loginReducer,
   user: userReducer
-  // Ajoutez d'autres reducers ici si nécessaire
+
 });
 
 const persistConfig = {
-  key: 'root', // La clé principale pour le stockage persistant
-  storage, // Utilisez le stockage par défaut (localStorage)
+  key: 'root',
+  storage, // localStorage
   blacklist: ['persist'], 
 };
 
